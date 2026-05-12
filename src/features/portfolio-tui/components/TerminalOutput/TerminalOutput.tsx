@@ -93,7 +93,10 @@ export function TerminalOutput({ entries, onRunCommand }: ITerminalOutputProps) 
   }, [entries]);
 
   return (
-    <div ref={ref} className="terminal">
+    <div
+      ref={ref}
+      className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth px-[1.375rem] pt-5 pb-0 max-[32.5rem]:px-3.5 max-[32.5rem]:pt-3.5 [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-md [&::-webkit-scrollbar-thumb]:bg-border-token"
+    >
       {entries.map((e) => (
         <div key={e.id}>{renderEntry(e, onRunCommand)}</div>
       ))}

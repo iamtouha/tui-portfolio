@@ -6,8 +6,8 @@ interface IThemeSetProps {
 
 export function ThemeSet({ name }: IThemeSetProps) {
   return (
-    <div className="block ok">
-      → theme: <span className="accent">{name}</span>
+    <div className="mb-1 mt-2 text-green">
+      → theme: <span className="text-accent">{name}</span>
     </div>
   );
 }
@@ -18,7 +18,7 @@ interface IThemeErrorProps {
 
 export function ThemeError({ attempted }: IThemeErrorProps) {
   return (
-    <div className="block err">
+    <div className="mb-1 mt-2 text-red">
       unknown theme: {attempted}. available:{" "}
       {THEMES.map((t) => t.name).join(", ")}
     </div>

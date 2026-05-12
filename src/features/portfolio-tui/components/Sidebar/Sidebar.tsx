@@ -8,13 +8,16 @@ interface ISidebarProps {
 
 export function Sidebar({ onRunCommand }: ISidebarProps) {
   return (
-    <aside className="sidebar">
-      <div className="group">
-        <h3>Commands</h3>
+    <aside className="w-[17.5rem] shrink-0 overflow-y-auto border-l border-border-token bg-bg-soft p-[1.125rem] text-[0.78125rem] max-[55rem]:hidden">
+      <div className="mb-[1.375rem]">
+        <h3 className="mb-2.5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-dim">
+          Commands
+        </h3>
         {SIDEBAR_COMMANDS.map((c) => (
           <div
             key={c.k}
-            className="sb-cmd"
+            className="flex cursor-pointer justify-between rounded-[0.1875rem] py-1 text-muted hover:text-fg"
+            data-terminal-clickable
             role="button"
             tabIndex={0}
             onClick={() => onRunCommand(c.k)}
@@ -22,38 +25,46 @@ export function Sidebar({ onRunCommand }: ISidebarProps) {
               if (e.key === "Enter") onRunCommand(c.k);
             }}
           >
-            <span className="k">{c.k}</span>
-            <span className="d">{c.d}</span>
+            <span className="text-accent">{c.k}</span>
+            <span className="text-[0.71875rem] text-dim">{c.d}</span>
           </div>
         ))}
       </div>
-      <div className="group">
-        <h3>Status</h3>
-        <div className="stat">
+      <div className="mb-[1.375rem]">
+        <h3 className="mb-2.5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-dim">
+          Status
+        </h3>
+        <div className="flex justify-between py-[0.1875rem] text-muted">
           <span>open to work</span>
-          <b>
-            <span className="ok">● yes</span>
+          <b className="font-medium text-fg">
+            <span className="text-green">● yes</span>
           </b>
         </div>
-        <div className="stat">
+        <div className="flex justify-between py-[0.1875rem] text-muted">
           <span>timezone</span>
-          <b>UTC+6</b>
+          <b className="font-medium text-fg">UTC+6</b>
         </div>
-        <div className="stat">
+        <div className="flex justify-between py-[0.1875rem] text-muted">
           <span>response</span>
-          <b>&lt; 24h</b>
+          <b className="font-medium text-fg">&lt; 24h</b>
         </div>
-        <div className="stat">
+        <div className="flex justify-between py-[0.1875rem] text-muted">
           <span>shell</span>
-          <b>zsh 5.9</b>
+          <b className="font-medium text-fg">zsh 5.9</b>
         </div>
       </div>
-      <div className="group">
-        <h3>Quick links</h3>
+      <div className="mb-[1.375rem]">
+        <h3 className="mb-2.5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-dim">
+          Quick links
+        </h3>
         {QUICK_LINKS.map((l) => (
-          <div key={l.key} className="sb-cmd">
+          <div
+            key={l.key}
+            className="flex cursor-pointer justify-between rounded-[0.1875rem] py-1 text-muted hover:text-fg"
+            data-terminal-clickable
+          >
             <a
-              className="link"
+              className="border-b border-dotted border-blue text-blue no-underline hover:border-accent hover:text-accent"
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"

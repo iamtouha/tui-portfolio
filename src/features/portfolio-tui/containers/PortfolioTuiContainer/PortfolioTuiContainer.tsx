@@ -45,10 +45,7 @@ export function PortfolioTuiContainer() {
     const target = e.target as HTMLElement;
     if (
       target.closest("a") ||
-      target.closest(".sb-cmd") ||
-      target.closest(".ac-item") ||
-      target.closest(".tl-clickable") ||
-      target.closest(".card-clickable") ||
+      target.closest("[data-terminal-clickable]") ||
       target.closest("input")
     ) {
       return;
@@ -60,11 +57,11 @@ export function PortfolioTuiContainer() {
   return (
     <div className="h-full flex flex-col" onClick={handleBodyClick}>
       <Chrome />
-      <div className="main">
+      <div className="flex min-h-0 flex-1">
         <TerminalOutput entries={entries} onRunCommand={runCommand} />
         <Sidebar onRunCommand={runCommand} />
       </div>
-      <div className="footer">
+      <div className="shrink-0 border-t border-border-token bg-bg">
         <InputBar
           ref={inputRef}
           onSubmit={runCommand}

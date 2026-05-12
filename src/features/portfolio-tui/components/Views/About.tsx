@@ -2,50 +2,63 @@ import { PROFILE } from "../../data";
 
 export function About() {
   return (
-    <div className="block">
-      <div className="b accent">{PROFILE.name}</div>
-      <div className="muted">
+    <div className="mb-1 mt-2">
+      <div className="font-bold text-accent">{PROFILE.name}</div>
+      <div className="text-muted">
         {PROFILE.role} · {PROFILE.location}
       </div>
-      <p className="line my-3 max-w-[64ch] text-fg">
+      <p className="m-0 my-3 max-w-[64ch] whitespace-pre-wrap break-words p-0 text-fg">
         {PROFILE.tagline}
       </p>
-      <table className="tbl">
+      <table className="mb-2.5 mt-1 w-full border-collapse">
         <tbody>
           <tr>
-            <td className="k">handle</td>
+            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
+              handle
+            </td>
             <td>@{PROFILE.handle}</td>
           </tr>
           <tr>
-            <td className="k">email</td>
+            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
+              email
+            </td>
             <td>
-              <a className="link" href={`mailto:${PROFILE.email}`}>
+              <a
+                className="border-b border-dotted border-blue text-blue no-underline hover:border-accent hover:text-accent"
+                href={`mailto:${PROFILE.email}`}
+              >
                 {PROFILE.email}
               </a>
             </td>
           </tr>
           <tr>
-            <td className="k">status</td>
+            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
+              status
+            </td>
             <td>
-              <span className="ok">● open to work / freelance</span>
+              <span className="text-green">● open to work / freelance</span>
             </td>
           </tr>
           <tr>
-            <td className="k">timezone</td>
+            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
+              timezone
+            </td>
             <td>UTC+6 (Asia/Dhaka)</td>
           </tr>
           <tr>
-            <td className="k">stack</td>
-            <td className="muted">
+            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
+              stack
+            </td>
+            <td className="text-muted">
               TypeScript · Next.js · Node.js · Postgres · Tailwind
             </td>
           </tr>
         </tbody>
       </table>
-      <div className="dim mt-2">
-        Run <span className="accent">/experience</span>,{" "}
-        <span className="accent">/projects</span>, or{" "}
-        <span className="accent">/contact</span> for more.
+      <div className="mt-2 text-dim">
+        Run <span className="text-accent">/experience</span>,{" "}
+        <span className="text-accent">/projects</span>, or{" "}
+        <span className="text-accent">/contact</span> for more.
       </div>
     </div>
   );

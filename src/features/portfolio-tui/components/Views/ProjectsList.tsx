@@ -16,28 +16,29 @@ export function ProjectsList({ tagFilter, onRunCommand }: IProjectsListProps) {
 
   if (!list.length) {
     return (
-      <div className="block muted">
-        no projects match <span className="accent">{tagFilter}</span>.
+      <div className="mb-1 mt-2 text-muted">
+        no projects match <span className="text-accent">{tagFilter}</span>.
       </div>
     );
   }
 
   return (
-    <div className="block">
-      <div className="muted">
+    <div className="mb-1 mt-2">
+      <div className="text-muted">
         {list.length} project{list.length === 1 ? "" : "s"}
         {tagFilter ? (
           <>
             {" "}
-            matching <span className="accent">{tagFilter}</span>
+            matching <span className="text-accent">{tagFilter}</span>
           </>
         ) : null}{" "}
-        · <span className="dim">click a card for details</span>
+        · <span className="text-dim">click a card for details</span>
       </div>
       {list.map((p) => (
         <div
           key={p.slug}
-          className="card card-clickable"
+          className="group relative my-2 cursor-pointer rounded border border-border-token bg-[var(--card-bg)] px-3.5 py-3 transition-[border-color,background] duration-150 hover:border-accent hover:bg-[var(--card-hover)]"
+          data-terminal-clickable
           role="button"
           tabIndex={0}
           onClick={() => onRunCommand(`/projects ${p.slug}`)}
@@ -46,26 +47,31 @@ export function ProjectsList({ tagFilter, onRunCommand }: IProjectsListProps) {
           }}
         >
           <div>
-            <span className="ctitle">{p.name}</span>{" "}
+            <span className="font-medium text-fg">{p.name}</span>{" "}
             {p.featured ? (
-              <span className="ctag accent">featured</span>
+              <span className="mr-1 my-0.5 inline-block rounded-[0.1875rem] border border-accent/40 bg-panel px-1.5 text-[0.6875rem] text-accent">
+                featured
+              </span>
             ) : null}
           </div>
-          <div className="csub">{p.desc}</div>
-          <div className="ctags">
+          <div className="mb-1.5 text-[0.78125rem] text-muted">{p.desc}</div>
+          <div className="mt-2">
             {p.tags.map((t) => (
-              <span key={t} className="ctag">
+              <span
+                key={t}
+                className="mr-1 my-0.5 inline-block rounded-[0.1875rem] border border-border-token bg-panel px-1.5 text-[0.6875rem] text-muted"
+              >
                 {t}
               </span>
             ))}
           </div>
-          <div className="open-hint">
-            ↳ <span className="accent">/projects {p.slug}</span>
+          <div className="mt-1.5 text-[0.71875rem] text-dim opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+            ↳ <span className="text-accent">/projects {p.slug}</span>
           </div>
         </div>
       ))}
-      <div className="dim">
-        filter: <span className="accent">/projects --tag nextjs</span>
+      <div className="text-dim">
+        filter: <span className="text-accent">/projects --tag nextjs</span>
       </div>
     </div>
   );

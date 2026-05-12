@@ -108,26 +108,26 @@ export const InputBar = forwardRef<IInputBarHandle, IInputBarProps>(
     }
 
     return (
-      <div className="inputbar">
-        <span className="prompt-glyph">
+      <div className="flex items-center gap-2.5 px-[1.375rem] py-2.5 max-[32.5rem]:px-3.5">
+        <span className="select-none font-medium text-accent">
           <span>touha</span>
-          <span className="at">@</span>
-          <span className="host">portfolio</span>
-          <span className="muted">:~$</span>
-          <span className="arrow">❯</span>
+          <span className="text-muted">@</span>
+          <span className="text-accent-2">portfolio</span>
+          <span className="text-muted">:~$</span>
+          <span className="ml-1 text-accent">❯</span>
         </span>
-        <div className="input-wrap">
-          <div className="ghost">
+        <div className="relative flex flex-1 items-center">
+          <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 whitespace-pre text-dim">
             {ghostTyped ? (
               <>
-                <span className="typed">{ghostTyped}</span>
+                <span className="text-transparent">{ghostTyped}</span>
                 {ghostRest}
               </>
             ) : null}
           </div>
           <input
             ref={inputRef}
-            className="cmd-input"
+            className="w-full border-0 bg-transparent p-0 font-[inherit] text-fg caret-accent outline-none"
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="off"
