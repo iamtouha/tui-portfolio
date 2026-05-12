@@ -1,7 +1,7 @@
 export function HintBar() {
   return (
     <div className="hintbar">
-      <div className="keys">
+      <div className="keys hidden sm:block">
         <span>
           <kbd>Tab</kbd> complete
         </span>
@@ -17,8 +17,7 @@ export function HintBar() {
         </span>
       </div>
       <div>
-        <span className="dim">type</span>{" "}
-        <span className="accent">/help</span>{" "}
+        <span className="dim">type</span> <span className="accent">/help</span>{" "}
         <span className="dim">for commands</span>
       </div>
     </div>
