@@ -1,16 +1,22 @@
 import { PROFILE } from "../../data";
 
+const RESUME_PDF = "/FSD_5_Touha_Zohair.pdf";
+
 export function Resume() {
   return (
     <div className="block">
-      <div className="muted">PDF not wired up in this prototype.</div>
-      <div className="mt-1.5">
-        For now: run <span className="accent">/experience</span> +{" "}
-        <span className="accent">/skills</span>, or email{" "}
+      <div>
+        Download:{" "}
+        <a className="link" href={RESUME_PDF} download>
+          FSD_5_Touha_Zohair.pdf
+        </a>
+      </div>
+      <div className="muted mt-1.5">
+        Or email{" "}
         <a className="link" href={`mailto:${PROFILE.email}`}>
           {PROFILE.email}
         </a>{" "}
-        and I&apos;ll send the latest CV.
+        for the latest CV.
       </div>
     </div>
   );
