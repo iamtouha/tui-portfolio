@@ -7,7 +7,7 @@ export function About() {
       <div className="text-muted">
         {PROFILE.role} · {PROFILE.location}
       </div>
-      <p className="m-0 my-3 max-w-[64ch] whitespace-pre-wrap break-words p-0 text-fg">
+      <p className="m-0 my-3 max-w-[72ch] whitespace-pre-wrap wrap-break-word p-0 text-fg">
         {PROFILE.tagline}
       </p>
       <table className="mb-2.5 mt-1 w-full border-collapse">
@@ -36,14 +36,14 @@ export function About() {
               status
             </td>
             <td>
-              <span className="text-green">● open to work / freelance</span>
+              <span className="text-green">● open to work</span>
             </td>
           </tr>
           <tr>
             <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
               timezone
             </td>
-            <td>UTC+6 (Asia/Dhaka)</td>
+            <td>{PROFILE.timezone}</td>
           </tr>
           <tr>
             <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
