@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import type { ICommandSpec } from "../../types";
 
 interface IAutocompleteProps {
@@ -17,11 +18,19 @@ export function Autocomplete({
   onPick,
   onHover,
 }: IAutocompleteProps) {
+  const activeRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    activeRef.current?.scrollIntoView({ block: "nearest" });
+  }, [open, activeIdx]);
+
   return (
     <div className={`autocomplete${open ? " open" : ""}`}>
       {matches.map((m, i) => (
         <div
           key={m.k}
+          ref={i === activeIdx ? activeRef : null}
           className={`ac-item${i === activeIdx ? " active" : ""}`}
           onMouseDown={(e) => {
             e.preventDefault();

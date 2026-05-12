@@ -52,10 +52,11 @@ export const InputBar = forwardRef<IInputBarHandle, IInputBarProps>(
     function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
       if (e.key === "Enter") {
         e.preventDefault();
-        const v = value;
+        const submitVal =
+          isOpen && matches[activeIdx] ? matches[activeIdx].k : value;
         setValue("");
         setActiveIdx(0);
-        onSubmit(v);
+        onSubmit(submitVal);
         return;
       }
       if (e.key === "Tab") {
