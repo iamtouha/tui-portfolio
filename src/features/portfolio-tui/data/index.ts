@@ -13,7 +13,7 @@ export const PROFILE: IProfile = {
   name: "Touha Zohair",
   handle: "iamtouha",
   timezone: "UTC+6 (Asia/Dhaka)",
-  role: "Full Stack Web Developer",
+  role: "Software Engineer",
   location: "Dhaka, Bangladesh",
   email: "mail@touha.dev",
   tagline:
