@@ -1,0 +1,149 @@
+backend:
+  name: github
+  repo: iamtouha/portfolio
+  branch: main
+  base_url: http://localhost:3000
+  auth_endpoint: api/decap/auth
+
+local_backend: true
+publish_mode: editorial_workflow
+site_url: http://localhost:3000
+display_url: http://localhost:3000
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: portfolio
+    label: Portfolio
+    files:
+      - name: profile
+        label: Profile
+        file: src/features/portfolio-tui/data/content/profile.json
+        format: json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Handle, name: handle, widget: string }
+          - { label: Role, name: role, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Email, name: email, widget: string }
+          - { label: Timezone, name: timezone, widget: string }
+          - { label: Tagline, name: tagline, widget: text }
+      - name: experience
+        label: Experience
+        file: src/features/portfolio-tui/data/content/experience.json
+        format: json
+        fields:
+          - label: Positions
+            name: items
+            widget: list
+            summary: "{{fields.role}} at {{fields.co}}"
+            fields:
+              - { label: Slug, name: slug, widget: string }
+              - { label: Role, name: role, widget: string }
+              - { label: Company, name: co, widget: string }
+              - { label: When, name: when, widget: string }
+              - { label: Description, name: desc, widget: text }
+              - {
+                  label: Highlights,
+                  name: highlights,
+                  widget: list,
+                  field: { label: Highlight, name: highlight, widget: string },
+                }
+              - {
+                  label: Stack,
+                  name: stack,
+                  widget: list,
+                  field: { label: Tool, name: tool, widget: string },
+                }
+      - name: projects
+        label: Projects
+        file: src/features/portfolio-tui/data/content/projects.json
+        format: json
+        fields:
+          - label: Projects
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Slug, name: slug, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: desc, widget: text }
+              - {
+                  label: Tags,
+                  name: tags,
+                  widget: list,
+                  field: { label: Tag, name: tag, widget: string },
+                }
+              - { label: Role, name: role, widget: string }
+              - { label: Year, name: year, widget: string }
+              - { label: About, name: about, widget: text }
+              - {
+                  label: Features,
+                  name: features,
+                  widget: list,
+                  field: { label: Feature, name: feature, widget: string },
+                }
+              - { label: URL, name: url, widget: string }
+              - {
+                  label: Featured,
+                  name: featured,
+                  widget: boolean,
+                  required: false,
+                  default: false,
+                }
+      - name: posts
+        label: Posts
+        file: src/features/portfolio-tui/data/content/posts.json
+        format: json
+        fields:
+          - label: Posts
+            name: items
+            widget: list
+            summary: "{{fields.t}}"
+            fields:
+              - { label: Title, name: t, widget: string }
+              - { label: Date, name: d, widget: string }
+              - {
+                  label: Minutes,
+                  name: min,
+                  widget: number,
+                  value_type: int,
+                  min: 1,
+                }
+              - { label: Summary, name: s, widget: text }
+              - { label: URL, name: url, widget: string }
+      - name: skills
+        label: Skills
+        file: src/features/portfolio-tui/data/content/skills.json
+        format: json
+        fields:
+          - label: Skill Groups
+            name: groups
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Name, name: name, widget: string }
+              - {
+                  label: Items,
+                  name: items,
+                  widget: list,
+                  field: { label: Skill, name: skill, widget: string },
+                }
+      - name: socials
+        label: Socials
+        file: src/features/portfolio-tui/data/content/socials.json
+        format: json
+        fields:
+          - label: Links
+            name: items
+            widget: list
+            summary: "{{fields.display}}"
+            fields:
+              - {
+                  label: Key,
+                  name: key,
+                  widget: select,
+                  options: [email, github, linkedin, twitter, fiverr, website],
+                }
+              - { label: Display, name: display, widget: string }
+              - { label: URL, name: href, widget: string }

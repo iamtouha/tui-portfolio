@@ -9,9 +9,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "touha@portfolio — TUI",
+  title: "touha@portfolio - TUI",
   description:
     "Terminal-style portfolio of Touha Zohair — Full Stack Web Developer. Type /help to begin.",
+  icons: { icon: "/avatar.png" },
 };
 
 interface IRootLayoutProps {

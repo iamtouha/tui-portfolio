@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "t": "Optimizing Array Search in JavaScript: Using \"Set\" for Efficient Lookups",
+      "d": "Oct 2, 2024",
+      "min": 5,
+      "s": "Traditional array methods get slow as data grows. Using Set lifts lookup performance dramatically for large datasets.",
+      "url": "https://www.touha.dev/posts/optimizing-array-search-in-javascript-using-set-for-efficient-lookups"
+    },
+    {
+      "t": "Create T3 App + Lucia — Simple Email/Password Auth for Next.js",
+      "d": "Dec 27, 2023",
+      "min": 2,
+      "s": "A pragmatic, flexible alternative to NextAuth.js using Lucia, wired into the T3 stack.",
+      "url": "https://www.touha.dev/posts/simple-nextjs-t3-authentication-with-lucia"
+    },
+    {
+      "t": "A TypeScript Type That Converts a String to a Number",
+      "d": "Dec 15, 2023",
+      "min": 5,
+      "s": "A pure-type trick I picked up solving an Advent of TypeScript challenge.",
+      "url": "https://www.touha.dev/posts/typescript-type-to-get-number-from-string"
+    }
+  ]
+}

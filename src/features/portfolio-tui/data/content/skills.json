@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "Languages",
+      "items": ["TypeScript", "JavaScript", "SQL", "Go", "Python"]
+    },
+    {
+      "name": "Frontend",
+      "items": ["React", "Next.js", "Tailwind CSS", "shadcn/ui", "Astro", "GatsbyJS"]
+    },
+    {
+      "name": "Backend",
+      "items": ["Node.js", "tRPC", "Express", "Lucia Auth", "Stripe"]
+    },
+    {
+      "name": "Data",
+      "items": ["PostgreSQL", "Drizzle ORM", "Prisma", "Pocketbase", "Sanity.io"]
+    },
+    {
+      "name": "Tooling",
+      "items": ["Turborepo", "Vercel", "Socket.io", "Docker", "Git"]
+    }
+  ]
+}

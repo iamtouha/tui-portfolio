@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "slug": "apricot-health",
+      "name": "Apricot Health",
+      "desc": "Generative AI-powered platform that streamlines patient documentation for 10+ organizations.",
+      "tags": ["nextjs", "material-ui", "cypress", "vitest", "inngest", "gcp", "claude"],
+      "role": "Full-stack developer",
+      "year": "2024 - 2025",
+      "about": "A generative AI-powered healthcare platform that helps organizations streamline patient documentation workflows.",
+      "features": [
+        "Built reusable UI components for documentation and workflow screens.",
+        "Developed secure APIs for healthcare documentation flows.",
+        "Wrote comprehensive unit, integration, and end-to-end tests.",
+        "Supported AI-assisted workflows used by more than 10 organizations."
+      ],
+      "url": "https://apricothealth.ai",
+      "featured": true
+    },
+    {
+      "slug": "unive",
+      "name": "Unive",
+      "desc": "EdTech platform for industry-specific skill development courses and assessment tests.",
+      "tags": ["nextjs", "express", "tailwindcss", "github-actions", "docker", "aws"],
+      "role": "Full-stack developer",
+      "year": "2024",
+      "about": "An EdTech platform offering industry-specific courses, assessment tests, backend services, and delivery infrastructure.",
+      "features": [
+        "Built course and assessment UI components.",
+        "Developed backend APIs for platform workflows.",
+        "Implemented CI/CD pipelines with GitHub Actions, Docker, and AWS.",
+        "Resolved 15+ critical security vulnerabilities."
+      ],
+      "url": "https://unive.com.bd"
+    },
+    {
+      "slug": "innochat",
+      "name": "Innochat",
+      "desc": "Realtime messaging kit with an npm package, embeddable widget, and admin dashboard.",
+      "tags": ["react", "web-components", "lit", "express", "prisma", "tanstack-query", "socket.io", "turborepo"],
+      "role": "Full-stack developer",
+      "year": "2023 - 2024",
+      "about": "A real-time messaging solution that can be integrated into any website by installing an npm package.",
+      "features": [
+        "Built an embeddable messaging kit for website integration.",
+        "Added image and file sharing for realtime conversations.",
+        "Implemented active status indicators and Socket.io messaging.",
+        "Built an admin dashboard for user management and performance tracking."
+      ],
+      "url": "https://chat.innomarktconsultancy.com"
+    }
+  ]
+}

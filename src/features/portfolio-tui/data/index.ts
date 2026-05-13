@@ -7,18 +7,29 @@ import type {
   ISocial,
   ITheme,
   TSkills,
-} from "../types";
+} from "@features/portfolio-tui/types";
+import experienceContent from "@features/portfolio-tui/data/content/experience.json";
+import postsContent from "@features/portfolio-tui/data/content/posts.json";
+import profileContent from "@features/portfolio-tui/data/content/profile.json";
+import projectsContent from "@features/portfolio-tui/data/content/projects.json";
+import skillsContent from "@features/portfolio-tui/data/content/skills.json";
+import socialsContent from "@features/portfolio-tui/data/content/socials.json";
 
-export const PROFILE: IProfile = {
-  name: "Touha Zohair",
-  handle: "iamtouha",
-  timezone: "UTC+6 (Asia/Dhaka)",
-  role: "Software Engineer",
-  location: "Dhaka, Bangladesh",
-  email: "mail@touha.dev",
-  tagline:
-    "Full-stack developer building scalable, reliable web apps, APIs, and intuitive interfaces. Experienced with performance, cloud platforms, AI tools, team leadership, and end-to-end project delivery.",
-};
+interface ISkillsContentGroup {
+  name: string;
+  items: string[];
+}
+
+const toSkills = (groups: ISkillsContentGroup[]) =>
+  groups.reduce<TSkills>(
+    (skills, group) => ({
+      ...skills,
+      [group.name]: group.items,
+    }),
+    {},
+  );
+
+export const PROFILE: IProfile = profileContent;
 
 export const COMMANDS: ICommandSpec[] = [
   { k: "/help", d: "list all commands" },
@@ -38,201 +49,15 @@ export const COMMANDS: ICommandSpec[] = [
   { k: "/exit", d: "...don't" },
 ];
 
-export const EXPERIENCE: IExperience[] = [
-  {
-    slug: "sazim-tech",
-    role: "Software Engineer I",
-    co: "Sazim Tech Ltd. · Full-time (hybrid)",
-    when: "March 2025 - Present",
-    desc: "Integrated user management and digital wallet functionality while improving onboarding flow and product UX.",
-    highlights: [
-      "Integrated secure user account management and digital wallet transactions.",
-      "Optimized onboarding workflow with improved UX and automation.",
-      "Reduced average onboarding time by 20%.",
-    ],
-    stack: ["Nest.js", "Next.js", "AWS", "Docker", "Playwright"],
-  },
-  {
-    slug: "grit-technologies",
-    role: "Full-stack Developer / Junior Full-stack Developer",
-    co: "Grit Technologies Limited · Full-time (hybrid)",
-    when: "March 2024 - February 2025",
-    desc: "Built secure product features, RPA APIs, AI prompt updates, and tested business logic for healthcare and organization workflows.",
-    highlights: [
-      "Implemented 2FA, identity verification, notifications, and related features for 10+ organizations.",
-      "Developed an RPA API that increased patient documentation capacity from 10 to 100+ per day.",
-      "Updated AI prompts and parsing logic to resolve 20+ stability and performance bugs.",
-      "Maintained over 80% test coverage with end-to-end, unit, and integration tests.",
-      "Improved app performance by 20% and cut deployment time by 60%.",
-    ],
-    stack: [
-      "Next.js",
-      "Anthropic Claude",
-      "Material UI",
-      "Prisma",
-      "tRPC",
-      "Cypress",
-      "Jest",
-      "NextAuth",
-      "Inngest",
-    ],
-  },
-  {
-    slug: "freelance",
-    role: "Web Developer",
-    co: "Freelance Web Development · Fiverr",
-    when: "September 2020 - February 2024",
-    desc: "Delivered web development projects for clients across React, Next.js, Node.js, Express, and MongoDB stacks.",
-    highlights: [
-      "Worked with more than 30 clients, including 12 recurring clients.",
-      "Completed 70+ orders across frontend and backend web development.",
-      "Achieved Level 2 seller status on Fiverr with 100% client satisfaction.",
-    ],
-    stack: ["React.js", "Next.js", "Node.js", "Express", "MongoDB"],
-  },
-];
+export const EXPERIENCE: IExperience[] = experienceContent.items;
 
-export const PROJECTS: IProject[] = [
-  {
-    slug: "apricot-health",
-    name: "Apricot Health",
-    desc: "Generative AI-powered platform that streamlines patient documentation for 10+ organizations.",
-    tags: [
-      "nextjs",
-      "material-ui",
-      "cypress",
-      "vitest",
-      "inngest",
-      "gcp",
-      "claude",
-    ],
-    role: "Full-stack developer",
-    year: "2024 - 2025",
-    about:
-      "A generative AI-powered healthcare platform that helps organizations streamline patient documentation workflows.",
-    features: [
-      "Built reusable UI components for documentation and workflow screens.",
-      "Developed secure APIs for healthcare documentation flows.",
-      "Wrote comprehensive unit, integration, and end-to-end tests.",
-      "Supported AI-assisted workflows used by more than 10 organizations.",
-    ],
-    url: "https://apricothealth.ai",
-    featured: true,
-  },
-  {
-    slug: "unive",
-    name: "Unive",
-    desc: "EdTech platform for industry-specific skill development courses and assessment tests.",
-    tags: [
-      "nextjs",
-      "express",
-      "tailwindcss",
-      "github-actions",
-      "docker",
-      "aws",
-    ],
-    role: "Full-stack developer",
-    year: "2024",
-    about:
-      "An EdTech platform offering industry-specific courses, assessment tests, backend services, and delivery infrastructure.",
-    features: [
-      "Built course and assessment UI components.",
-      "Developed backend APIs for platform workflows.",
-      "Implemented CI/CD pipelines with GitHub Actions, Docker, and AWS.",
-      "Resolved 15+ critical security vulnerabilities.",
-    ],
-    url: "https://unive.com.bd",
-  },
-  {
-    slug: "innochat",
-    name: "Innochat",
-    desc: "Realtime messaging kit with an npm package, embeddable widget, and admin dashboard.",
-    tags: [
-      "react",
-      "web-components",
-      "lit",
-      "express",
-      "prisma",
-      "tanstack-query",
-      "socket.io",
-      "turborepo",
-    ],
-    role: "Full-stack developer",
-    year: "2023 - 2024",
-    about:
-      "A real-time messaging solution that can be integrated into any website by installing an npm package.",
-    features: [
-      "Built an embeddable messaging kit for website integration.",
-      "Added image and file sharing for realtime conversations.",
-      "Implemented active status indicators and Socket.io messaging.",
-      "Built an admin dashboard for user management and performance tracking.",
-    ],
-    url: "https://chat.innomarktconsultancy.com",
-  },
-];
+export const PROJECTS: IProject[] = projectsContent.items;
 
-export const POSTS: IPost[] = [
-  {
-    t: 'Optimizing Array Search in JavaScript: Using "Set" for Efficient Lookups',
-    d: "Oct 2, 2024",
-    min: 5,
-    s: "Traditional array methods get slow as data grows. Using Set lifts lookup performance dramatically for large datasets.",
-    url: "https://www.touha.dev/posts/optimizing-array-search-in-javascript-using-set-for-efficient-lookups",
-  },
-  {
-    t: "Create T3 App + Lucia — Simple Email/Password Auth for Next.js",
-    d: "Dec 27, 2023",
-    min: 2,
-    s: "A pragmatic, flexible alternative to NextAuth.js using Lucia, wired into the T3 stack.",
-    url: "https://www.touha.dev/posts/simple-nextjs-t3-authentication-with-lucia",
-  },
-  {
-    t: "A TypeScript Type That Converts a String to a Number",
-    d: "Dec 15, 2023",
-    min: 5,
-    s: "A pure-type trick I picked up solving an Advent of TypeScript challenge.",
-    url: "https://www.touha.dev/posts/typescript-type-to-get-number-from-string",
-  },
-];
+export const POSTS: IPost[] = postsContent.items;
 
-export const SKILLS: TSkills = {
-  Languages: ["TypeScript", "JavaScript", "SQL", "Go", "Python"],
-  Frontend: [
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "shadcn/ui",
-    "Astro",
-    "GatsbyJS",
-  ],
-  Backend: ["Node.js", "tRPC", "Express", "Lucia Auth", "Stripe"],
-  Data: ["PostgreSQL", "Drizzle ORM", "Prisma", "Pocketbase", "Sanity.io"],
-  Tooling: ["Turborepo", "Vercel", "Socket.io", "Docker", "Git"],
-};
+export const SKILLS: TSkills = toSkills(skillsContent.groups);
 
-export const SOCIAL: ISocial[] = [
-  { key: "email", display: "mail@touha.dev", href: "mailto:mail@touha.dev" },
-  {
-    key: "github",
-    display: "github.com/iamtouha",
-    href: "https://github.com/iamtouha",
-  },
-  {
-    key: "linkedin",
-    display: "linkedin.com/in/touhazr",
-    href: "https://www.linkedin.com/in/touhazr",
-  },
-  {
-    key: "twitter",
-    display: "twitter.com/iamtouha",
-    href: "https://twitter.com/iamtouha",
-  },
-  {
-    key: "fiverr",
-    display: "fiverr.com/touha98",
-    href: "https://www.fiverr.com/touha98",
-  },
-];
+export const SOCIAL: ISocial[] = socialsContent.items;
 
 export const THEMES: ITheme[] = [
   {

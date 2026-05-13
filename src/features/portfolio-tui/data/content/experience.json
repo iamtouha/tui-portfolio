@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "slug": "sazim-tech",
+      "role": "Software Engineer I",
+      "co": "Sazim Tech Ltd. · Full-time (hybrid)",
+      "when": "March 2025 - Present",
+      "desc": "Integrated user management and digital wallet functionality while improving onboarding flow and product UX.",
+      "highlights": [
+        "Integrated secure user account management and digital wallet transactions.",
+        "Optimized onboarding workflow with improved UX and automation.",
+        "Reduced average onboarding time by 20%."
+      ],
+      "stack": ["Nest.js", "Next.js", "AWS", "Docker", "Playwright"]
+    },
+    {
+      "slug": "grit-technologies",
+      "role": "Full-stack Developer / Junior Full-stack Developer",
+      "co": "Grit Technologies Limited · Full-time (hybrid)",
+      "when": "March 2024 - February 2025",
+      "desc": "Built secure product features, RPA APIs, AI prompt updates, and tested business logic for healthcare and organization workflows.",
+      "highlights": [
+        "Implemented 2FA, identity verification, notifications, and related features for 10+ organizations.",
+        "Developed an RPA API that increased patient documentation capacity from 10 to 100+ per day.",
+        "Updated AI prompts and parsing logic to resolve 20+ stability and performance bugs.",
+        "Maintained over 80% test coverage with end-to-end, unit, and integration tests.",
+        "Improved app performance by 20% and cut deployment time by 60%."
+      ],
+      "stack": [
+        "Next.js",
+        "Anthropic Claude",
+        "Material UI",
+        "Prisma",
+        "tRPC",
+        "Cypress",
+        "Jest",
+        "NextAuth",
+        "Inngest"
+      ]
+    },
+    {
+      "slug": "freelance",
+      "role": "Web Developer",
+      "co": "Freelance Web Development · Fiverr",
+      "when": "September 2020 - February 2024",
+      "desc": "Delivered web development projects for clients across React, Next.js, Node.js, Express, and MongoDB stacks.",
+      "highlights": [
+        "Worked with more than 30 clients, including 12 recurring clients.",
+        "Completed 70+ orders across frontend and backend web development.",
+        "Achieved Level 2 seller status on Fiverr with 100% client satisfaction."
+      ],
+      "stack": ["React.js", "Next.js", "Node.js", "Express", "MongoDB"]
+    }
+  ]
+}

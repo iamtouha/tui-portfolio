@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "key": "email",
+      "display": "mail@touha.dev",
+      "href": "mailto:mail@touha.dev"
+    },
+    {
+      "key": "github",
+      "display": "github.com/iamtouha",
+      "href": "https://github.com/iamtouha"
+    },
+    {
+      "key": "linkedin",
+      "display": "linkedin.com/in/touhazr",
+      "href": "https://www.linkedin.com/in/touhazr"
+    },
+    {
+      "key": "twitter",
+      "display": "twitter.com/iamtouha",
+      "href": "https://twitter.com/iamtouha"
+    },
+    {
+      "key": "fiverr",
+      "display": "fiverr.com/touha98",
+      "href": "https://www.fiverr.com/touha98"
+    }
+  ]
+}

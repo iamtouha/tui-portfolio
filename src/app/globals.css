@@ -41,5 +41,6 @@
   --color-red: var(--red);
   --color-yellow: var(--yellow);
   --color-dot-red: var(--dot-red);
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
