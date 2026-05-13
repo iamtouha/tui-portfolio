@@ -1,5 +1,5 @@
 {
-  "title": "Why Performance Profiling Matters",
+  "title": "Performance Profiling Part 1: Why Performance Profiling Matters",
   "date": "2025-10-26",
   "cover": "/uploads/performance_profiling_in_be_fe.jpg",
   "summary": "A practical introduction to performance profiling, why guessing leads to wasted optimization work, and how profiling connects user experience, infrastructure cost, and production reliability.",
