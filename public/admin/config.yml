@@ -179,3 +179,12 @@ collections:
       - { label: Cover Image, name: cover, widget: image }
       - { label: Summary, name: summary, widget: text }
       - { label: Body, name: body, widget: markdown }
+      - label: Related Posts
+        name: relatedPosts
+        widget: relation
+        collection: posts
+        multiple: true
+        search_fields: [title]
+        display_fields: [title]
+        value_field: "{{slug}}"
+        required: false
