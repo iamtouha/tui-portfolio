@@ -9,11 +9,16 @@ import type {
   TSkills,
 } from "@features/portfolio-tui/types";
 import experienceContent from "@features/portfolio-tui/data/content/experience.json";
-import postsContent from "@features/portfolio-tui/data/content/posts.json";
+import addingPerformanceProfilingToYourDailyWorkflowPost from "@features/portfolio-tui/data/content/posts/adding-performance-profiling-to-your-daily-workflow.json";
+import backendProfilingInNodeJsWithDevtoolsAndAutocannonPost from "@features/portfolio-tui/data/content/posts/backend-profiling-in-node-js-with-devtools-and-autocannon.json";
+import findingMemoryLeaksAndSlowDatabaseQueriesPost from "@features/portfolio-tui/data/content/posts/finding-memory-leaks-and-slow-database-queries.json";
+import frontendProfilingWithLighthouseAndChromeDevtoolsPost from "@features/portfolio-tui/data/content/posts/frontend-profiling-with-lighthouse-and-chrome-devtools.json";
 import profileContent from "@features/portfolio-tui/data/content/profile.json";
 import projectsContent from "@features/portfolio-tui/data/content/projects.json";
 import skillsContent from "@features/portfolio-tui/data/content/skills.json";
 import socialsContent from "@features/portfolio-tui/data/content/socials.json";
+import theFundamentalsTimeCpuMemoryAndNetworkPost from "@features/portfolio-tui/data/content/posts/the-fundamentals-time-cpu-memory-and-network.json";
+import whyPerformanceProfilingMattersPost from "@features/portfolio-tui/data/content/posts/why-performance-profiling-matters.json";
 
 interface ISkillsContentGroup {
   name: string;
@@ -53,7 +58,14 @@ export const EXPERIENCE: IExperience[] = experienceContent.items;
 
 export const PROJECTS: IProject[] = projectsContent.items;
 
-export const POSTS: IPost[] = postsContent.items;
+export const POSTS: IPost[] = [
+  whyPerformanceProfilingMattersPost,
+  theFundamentalsTimeCpuMemoryAndNetworkPost,
+  backendProfilingInNodeJsWithDevtoolsAndAutocannonPost,
+  findingMemoryLeaksAndSlowDatabaseQueriesPost,
+  frontendProfilingWithLighthouseAndChromeDevtoolsPost,
+  addingPerformanceProfilingToYourDailyWorkflowPost,
+].sort((a, b) => b.date.localeCompare(a.date));
 
 export const SKILLS: TSkills = toSkills(skillsContent.groups);
 

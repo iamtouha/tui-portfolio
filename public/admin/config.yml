@@ -167,11 +167,10 @@ collections:
       visualEditing: true
     sortable_fields:
       - title
-      - d
-      - min
+      - date
     view_groups:
       - label: Year
-        field: d
+        field: date
         pattern: \d{4}
     fields:
       - { label: Title, name: title, widget: string }

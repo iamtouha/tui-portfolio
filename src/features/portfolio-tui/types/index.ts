@@ -37,11 +37,12 @@ export interface IProject {
 }
 
 export interface IPost {
-  t: string;
-  d: string;
-  min: number;
-  s: string;
-  url: string;
+  title: string;
+  date: string;
+  cover: string;
+  summary: string;
+  body: string;
+  relatedPosts?: string[];
 }
 
 export interface ISocial {
