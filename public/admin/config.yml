@@ -28,6 +28,27 @@ collections:
           - { label: Email, name: email, widget: string }
           - { label: Timezone, name: timezone, widget: string }
           - { label: Tagline, name: tagline, widget: text }
+      - name: featured
+        label: Featured Posts/Projects
+        file: src/features/portfolio-tui/data/content/featured.json
+        format: json
+        fields:
+          - label: Featured Posts
+            name: featuredPosts
+            widget: relation
+            collection: posts
+            multiple: true
+            search_fields: [title]
+            display_fields: [title]
+            value_field: "{{slug}}"
+          - label: Featured Projects
+            name: featuredProjects
+            widget: relation
+            collection: projects
+            multiple: true
+            search_fields: [name]
+            display_fields: [name]
+            value_field: "{{slug}}"
       - name: experience
         label: Experience
         file: src/features/portfolio-tui/data/content/experience.json
