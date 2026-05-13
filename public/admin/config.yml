@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: iamtouha/portfolio
+  repo: iamtouha/tui-portfolio
   branch: main
   base_url: http://localhost:3000
   auth_endpoint: api/decap/auth
@@ -55,63 +55,6 @@ collections:
                   widget: list,
                   field: { label: Tool, name: tool, widget: string },
                 }
-      - name: projects
-        label: Projects
-        file: src/features/portfolio-tui/data/content/projects.json
-        format: json
-        fields:
-          - label: Projects
-            name: items
-            widget: list
-            summary: "{{fields.name}}"
-            fields:
-              - { label: Slug, name: slug, widget: string }
-              - { label: Name, name: name, widget: string }
-              - { label: Description, name: desc, widget: text }
-              - {
-                  label: Tags,
-                  name: tags,
-                  widget: list,
-                  field: { label: Tag, name: tag, widget: string },
-                }
-              - { label: Role, name: role, widget: string }
-              - { label: Year, name: year, widget: string }
-              - { label: About, name: about, widget: text }
-              - {
-                  label: Features,
-                  name: features,
-                  widget: list,
-                  field: { label: Feature, name: feature, widget: string },
-                }
-              - { label: URL, name: url, widget: string }
-              - {
-                  label: Featured,
-                  name: featured,
-                  widget: boolean,
-                  required: false,
-                  default: false,
-                }
-      - name: posts
-        label: Posts
-        file: src/features/portfolio-tui/data/content/posts.json
-        format: json
-        fields:
-          - label: Posts
-            name: items
-            widget: list
-            summary: "{{fields.t}}"
-            fields:
-              - { label: Title, name: t, widget: string }
-              - { label: Date, name: d, widget: string }
-              - {
-                  label: Minutes,
-                  name: min,
-                  widget: number,
-                  value_type: int,
-                  min: 1,
-                }
-              - { label: Summary, name: s, widget: text }
-              - { label: URL, name: url, widget: string }
       - name: skills
         label: Skills
         file: src/features/portfolio-tui/data/content/skills.json
@@ -147,3 +90,71 @@ collections:
                 }
               - { label: Display, name: display, widget: string }
               - { label: URL, name: href, widget: string }
+  - name: projects
+    label: Projects
+    label_singular: Project
+    description: >
+      Selected portfolio projects shown in the terminal UI.
+    folder: src/features/portfolio-tui/data/content/projects
+    identifier_field: name
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    summary: "{{name}} -- {{year}}"
+    create: true
+    editor:
+      visualEditing: true
+    sortable_fields:
+      - name
+      - year
+    view_groups:
+      - label: Year
+        field: year
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Summary, name: summary, widget: string }
+      - { label: Body, name: body, widget: markdown }
+      - { label: Role, name: role, widget: string }
+      - { label: Year, name: year, widget: string }
+      - { label: Repo/Project URL, name: url, widget: string }
+      - {
+          label: Features,
+          name: features,
+          widget: list,
+          field: { label: Feature, name: feature, widget: string },
+        }
+      - {
+          label: Tags,
+          name: tags,
+          widget: list,
+          field: { label: Tag, name: tag, widget: string },
+        }
+
+  - name: posts
+    label: Posts
+    label_singular: Post
+    description: >
+      Published writing links shown in the terminal UI.
+    folder: src/features/portfolio-tui/data/content/posts
+    identifier_field: title
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    create: true
+    editor:
+      visualEditing: true
+    sortable_fields:
+      - title
+      - d
+      - min
+    view_groups:
+      - label: Year
+        field: d
+        pattern: \d{4}
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: string }
+      - { label: Cover Image, name: cover, widget: image }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Body, name: body, widget: markdown }

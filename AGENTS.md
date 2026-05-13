@@ -170,6 +170,7 @@ pulse-merchant-portal/
 
 ### DONT's
 
+- DON'T Run dev server
 - DON'T Add useless comments
 - DON'T Skip tests when modifying components/hooks/reducers
 - DON'T Use inline styles; use TailwindCSS
