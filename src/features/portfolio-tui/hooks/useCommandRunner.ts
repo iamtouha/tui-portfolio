@@ -3,7 +3,16 @@
 import { useCallback } from "react";
 import { THEMES } from "../data";
 import { useTerminalStore } from "../stores";
-import { ETerminalEntryKind, type TTerminalEntryInput } from "../types";
+import {
+  EChatStatus,
+  ETerminalEntryKind,
+  type IChatHistoryTurn,
+  type TTerminalEntry,
+  type TTerminalEntryInput,
+} from "../types";
+import { useChatStream } from "./useChatStream";
+
+const CHAT_HISTORY_PAIRS = 5;
 
 type TEntryInput = TTerminalEntryInput;
 
@@ -132,6 +141,33 @@ function nowHHMM(): string {
   return new Date().toTimeString().slice(0, 5);
 }
 
+function buildChatHistory(entries: TTerminalEntry[]): IChatHistoryTurn[] {
+  const turns: IChatHistoryTurn[] = [];
+  for (let i = 0; i < entries.length; i++) {
+    const e = entries[i];
+    if (
+      e.kind !== ETerminalEntryKind.CHAT_RESPONSE ||
+      e.status !== EChatStatus.DONE ||
+      !e.text
+    ) {
+      continue;
+    }
+    let userPrompt: string | null = null;
+    for (let j = i - 1; j >= 0; j--) {
+      const prev = entries[j];
+      if (prev.kind === ETerminalEntryKind.PROMPT) {
+        userPrompt = prev.cmd;
+        break;
+      }
+    }
+    if (!userPrompt) continue;
+    turns.push({ role: "user", text: userPrompt });
+    turns.push({ role: "model", text: e.text });
+  }
+  const limit = CHAT_HISTORY_PAIRS * 2;
+  return turns.length > limit ? turns.slice(-limit) : turns;
+}
+
 export function useCommandRunner(): (raw: string) => void {
   const pushEntry = useTerminalStore((s) => s.pushEntry);
   const pushHistory = useTerminalStore((s) => s.pushHistory);
@@ -139,6 +175,7 @@ export function useCommandRunner(): (raw: string) => void {
   const cycleTheme = useTerminalStore((s) => s.cycleTheme);
   const setThemeByName = useTerminalStore((s) => s.setThemeByName);
   const openPicker = useTerminalStore((s) => s.openPicker);
+  const startChatStream = useChatStream();
 
   return useCallback(
     (raw: string) => {
@@ -216,7 +253,17 @@ export function useCommandRunner(): (raw: string) => void {
 
       const handler = HANDLERS[cmd];
       if (!handler) {
-        pushEntry({ kind: ETerminalEntryKind.ERROR, message: cmd });
+        if (trimmed.startsWith("/")) {
+          pushEntry({ kind: ETerminalEntryKind.ERROR, message: cmd });
+          return;
+        }
+        const entryId = pushEntry({
+          kind: ETerminalEntryKind.CHAT_RESPONSE,
+          text: "",
+          status: EChatStatus.STREAMING,
+        });
+        const history = buildChatHistory(useTerminalStore.getState().entries);
+        void startChatStream({ entryId, message: trimmed, history });
         return;
       }
       const result = handler(args);
@@ -233,6 +280,7 @@ export function useCommandRunner(): (raw: string) => void {
       cycleTheme,
       setThemeByName,
       openPicker,
+      startChatStream,
     ],
   );
 }

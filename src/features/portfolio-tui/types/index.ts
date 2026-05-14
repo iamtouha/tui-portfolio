@@ -114,6 +114,18 @@ export enum ETerminalEntryKind {
   ECHO = "echo",
   EXIT = "exit",
   ERROR = "error",
+  CHAT_RESPONSE = "chat-response",
+}
+
+export enum EChatStatus {
+  STREAMING = "streaming",
+  DONE = "done",
+  ERROR = "error",
+}
+
+export interface IChatHistoryTurn {
+  role: "user" | "model";
+  text: string;
 }
 
 export type TDistributiveOmit<T, K extends string> = T extends unknown
@@ -142,6 +154,13 @@ export type TTerminalEntry =
   | { id: number; kind: ETerminalEntryKind.DATE; iso: string }
   | { id: number; kind: ETerminalEntryKind.ECHO; text: string }
   | { id: number; kind: ETerminalEntryKind.EXIT }
-  | { id: number; kind: ETerminalEntryKind.ERROR; message: string };
+  | { id: number; kind: ETerminalEntryKind.ERROR; message: string }
+  | {
+      id: number;
+      kind: ETerminalEntryKind.CHAT_RESPONSE;
+      text: string;
+      status: EChatStatus;
+      errorMessage?: string;
+    };
 
 export type TTerminalEntryInput = TDistributiveOmit<TTerminalEntry, "id">;

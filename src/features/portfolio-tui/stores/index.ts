@@ -35,6 +35,23 @@ function applyThemeToDom(theme: ITheme): void {
 
 export type TPickerType = "posts" | "projects";
 
+const STREAM_ABORTERS = new Map<number, AbortController>();
+
+function registerStreamAbort(id: number, controller: AbortController): void {
+  STREAM_ABORTERS.set(id, controller);
+}
+
+function clearStreamAbort(id: number): void {
+  STREAM_ABORTERS.delete(id);
+}
+
+function abortAllStreams(): void {
+  for (const controller of STREAM_ABORTERS.values()) {
+    controller.abort();
+  }
+  STREAM_ABORTERS.clear();
+}
+
 interface ITerminalState {
   entries: TTerminalEntry[];
   history: string[];
@@ -45,7 +62,10 @@ interface ITerminalState {
   pickerType: TPickerType | null;
   pickerQuery: string;
   pickerIdx: number;
-  pushEntry: (e: TTerminalEntryInput) => void;
+  pushEntry: (e: TTerminalEntryInput) => number;
+  updateEntry: (id: number, patch: (e: TTerminalEntry) => TTerminalEntry) => void;
+  registerStreamAbort: (id: number, controller: AbortController) => void;
+  clearStreamAbort: (id: number) => void;
   resetToBoot: () => void;
   pushHistory: (cmd: string) => void;
   setHistIdx: (i: number) => void;
@@ -70,15 +90,23 @@ export const useTerminalStore = create<ITerminalState>()(
       pickerType: null,
       pickerQuery: "",
       pickerIdx: 0,
-      pushEntry: (e) =>
-        set((s) => {
-          const id = s._entryId + 1;
-          return {
-            _entryId: id,
-            entries: [...s.entries, { ...e, id } as TTerminalEntry],
-          };
-        }),
-      resetToBoot: () =>
+      pushEntry: (e) => {
+        const id = get()._entryId + 1;
+        set((s) => ({
+          _entryId: id,
+          entries: [...s.entries, { ...e, id } as TTerminalEntry],
+        }));
+        return id;
+      },
+      updateEntry: (id, patch) =>
+        set((s) => ({
+          entries: s.entries.map((e) => (e.id === id ? patch(e) : e)),
+        })),
+      registerStreamAbort: (id, controller) =>
+        registerStreamAbort(id, controller),
+      clearStreamAbort: (id) => clearStreamAbort(id),
+      resetToBoot: () => {
+        abortAllStreams();
         set((s) => {
           const bootId = s._entryId + 1;
           const homeId = bootId + 1;
@@ -89,7 +117,8 @@ export const useTerminalStore = create<ITerminalState>()(
               { id: homeId, kind: ETerminalEntryKind.HOME },
             ],
           };
-        }),
+        });
+      },
       pushHistory: (cmd) =>
         set((s) => {
           const history = [...s.history, cmd];

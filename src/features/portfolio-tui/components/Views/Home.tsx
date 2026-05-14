@@ -181,11 +181,15 @@ export function Home({ onRunCommand }: IHomeProps) {
         </section>
       ) : null}
 
-      <div className="mt-3 text-dim">
+      <div className="mt-3 text-dim hidden">
         tip: <span className="text-accent">Tab</span> into cards ·{" "}
         <span className="text-accent">←↑↓→</span> navigate ·{" "}
         <span className="text-accent">Enter</span> open ·{" "}
         <span className="text-accent">Esc</span> back to prompt
+      </div>
+      <div className="mt-1 text-dim">
+        tip: ask me anything — try{" "}
+        <span className="text-accent">what stacks do you work with?</span>
       </div>
     </div>
   );

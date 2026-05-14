@@ -1,4 +1,9 @@
-import { EColorScheme, type ICommandSpec, type ISocial, type ITheme } from "@features/portfolio-tui/types";
+import {
+  EColorScheme,
+  type ICommandSpec,
+  type ISocial,
+  type ITheme,
+} from "@features/portfolio-tui/types";
 
 export const COMMANDS: ICommandSpec[] = [
   { k: "/help", d: "list all commands" },

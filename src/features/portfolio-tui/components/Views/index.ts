@@ -12,6 +12,7 @@ export { PostDetail } from "./PostDetail";
 export { Contact } from "./Contact";
 export { Resume } from "./Resume";
 export { ThemeSet, ThemeError } from "./ThemeViews";
+export { ChatResponse } from "./ChatResponse";
 export {
   Whoami,
   Uname,

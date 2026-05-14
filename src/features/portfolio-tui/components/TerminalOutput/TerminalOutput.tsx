@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { Banner } from "../Banner";
 import {
   About,
+  ChatResponse,
   Contact,
   DateView,
   Echo,
@@ -86,6 +87,8 @@ function renderEntry(
       return <ExitView />;
     case ETerminalEntryKind.ERROR:
       return <ErrorView message={entry.message} />;
+    case ETerminalEntryKind.CHAT_RESPONSE:
+      return <ChatResponse entry={entry} />;
   }
 }
 
