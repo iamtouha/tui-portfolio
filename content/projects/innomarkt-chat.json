@@ -1,0 +1,29 @@
+{
+  "name": "Innomarkt: Chat Widget, and Realtime Messaging Backend",
+  "desc": "A live customer support chat system with a framework-agnostic web component widget, realtime messaging, and file sending.",
+  "tags": [
+    "turborepo",
+    "react",
+    "express",
+    "lit-element",
+    "tailwindcss",
+    "socket.io",
+    "prisma",
+    "nextjs",
+    "mysql",
+    "aws-ec2"
+  ],
+  "role": "Full-stack Developer",
+  "year": "Aug 13, 2023",
+  "about": "Realtime customer support is a must-have feature for many commercial websites. Innomarkt Chat lets any website add live chat without writing framework-specific integration code by using a web component widget that works across different frontend stacks.\n\nThe chat widget is built with Lit Element and published to npm as @innomarkt/chat-widget. Clients import the package, add <chat-widget apikey=\"Client API Key\"></chat-widget> to their website, and use the API key generated from the admin dashboard. Widget styling can be adjusted through theme attributes so it can match the host website.\n\nRealtime communication between visitors and support agents is handled with Socket.io. The backend is built with Express, Prisma, and MySQL, while the server and local MySQL database are deployed on an AWS EC2 instance. Clients manage configuration from an admin dashboard, and support teams respond to visitor messages through a dedicated chat dashboard.",
+  "features": [
+    "Realtime visitor and support-agent communication over websockets.",
+    "Framework-agnostic website integration using a Lit Element web component.",
+    "File sending support inside chat conversations.",
+    "Responsive chat widget design for desktop and mobile websites.",
+    "Customizable widget theme through client-provided theme attributes.",
+    "Admin dashboard for managing clients and API keys.",
+    "Chat dashboard for responding to visitor messages.",
+    "Express, Socket.io, Prisma, MySQL, and AWS EC2 backend deployment."
+  ]
+}

@@ -16,9 +16,22 @@ function parseTagFilter(args: string[]): string {
   return args[args.indexOf(flag) + 1] ?? "";
 }
 
+function parsePage(args: string[]): number | null {
+  const flag = args.find((a) => a.startsWith("--page"));
+  if (!flag) return null;
+  const raw = flag.includes("=")
+    ? flag.split("=")[1]
+    : args[args.indexOf(flag) + 1];
+  const n = parseInt(raw ?? "", 10);
+  if (!Number.isFinite(n) || n < 1) return 1;
+  return n;
+}
+
 function normalizeSlug(raw: string): string {
   return raw.toLowerCase().replace(/^\//, "");
 }
+
+const HOME_KINDS: TEntryInput[] = [{ kind: ETerminalEntryKind.HOME }];
 
 const HANDLERS: Record<string, THandler> = {
   "/help": () => [{ kind: ETerminalEntryKind.HELP }],
@@ -28,6 +41,9 @@ const HANDLERS: Record<string, THandler> = {
 
   "/about": () => [{ kind: ETerminalEntryKind.ABOUT }],
   about: () => [{ kind: ETerminalEntryKind.ABOUT }],
+
+  "/home": () => HOME_KINDS,
+  home: () => HOME_KINDS,
 
   "/experience": (args) =>
     args[0]
@@ -57,77 +73,8 @@ const HANDLERS: Record<string, THandler> = {
         ]
       : [{ kind: ETerminalEntryKind.EXPERIENCE_LIST }],
 
-  "/projects": (args) => {
-    if (args[0] && !args[0].startsWith("--")) {
-      return [
-        {
-          kind: ETerminalEntryKind.PROJECT_DETAIL,
-          slug: normalizeSlug(args[0]),
-        },
-      ];
-    }
-    return [
-      {
-        kind: ETerminalEntryKind.PROJECTS_LIST,
-        tagFilter: parseTagFilter(args),
-      },
-    ];
-  },
-  projects: (args) => {
-    if (args[0] && !args[0].startsWith("--")) {
-      return [
-        {
-          kind: ETerminalEntryKind.PROJECT_DETAIL,
-          slug: normalizeSlug(args[0]),
-        },
-      ];
-    }
-    return [
-      {
-        kind: ETerminalEntryKind.PROJECTS_LIST,
-        tagFilter: parseTagFilter(args),
-      },
-    ];
-  },
-  "/p": (args) => {
-    if (args[0] && !args[0].startsWith("--")) {
-      return [
-        {
-          kind: ETerminalEntryKind.PROJECT_DETAIL,
-          slug: normalizeSlug(args[0]),
-        },
-      ];
-    }
-    return [
-      {
-        kind: ETerminalEntryKind.PROJECTS_LIST,
-        tagFilter: parseTagFilter(args),
-      },
-    ];
-  },
-  ls: (args) => {
-    if (args[0] && !args[0].startsWith("--")) {
-      return [
-        {
-          kind: ETerminalEntryKind.PROJECT_DETAIL,
-          slug: normalizeSlug(args[0]),
-        },
-      ];
-    }
-    return [
-      {
-        kind: ETerminalEntryKind.PROJECTS_LIST,
-        tagFilter: parseTagFilter(args),
-      },
-    ];
-  },
-
   "/skills": () => [{ kind: ETerminalEntryKind.SKILLS }],
   skills: () => [{ kind: ETerminalEntryKind.SKILLS }],
-
-  "/posts": () => [{ kind: ETerminalEntryKind.POSTS }],
-  posts: () => [{ kind: ETerminalEntryKind.POSTS }],
-  "/blog": () => [{ kind: ETerminalEntryKind.POSTS }],
 
   "/contact": () => [{ kind: ETerminalEntryKind.CONTACT }],
   contact: () => [{ kind: ETerminalEntryKind.CONTACT }],
@@ -178,6 +125,9 @@ const HANDLERS: Record<string, THandler> = {
   quit: () => [{ kind: ETerminalEntryKind.EXIT }],
 };
 
+const PROJECTS_CMDS = new Set(["/projects", "projects", "/p", "ls"]);
+const POSTS_CMDS = new Set(["/posts", "posts", "/blog"]);
+
 function nowHHMM(): string {
   return new Date().toTimeString().slice(0, 5);
 }
@@ -188,6 +138,7 @@ export function useCommandRunner(): (raw: string) => void {
   const resetToBoot = useTerminalStore((s) => s.resetToBoot);
   const cycleTheme = useTerminalStore((s) => s.cycleTheme);
   const setThemeByName = useTerminalStore((s) => s.setThemeByName);
+  const openPicker = useTerminalStore((s) => s.openPicker);
 
   return useCallback(
     (raw: string) => {
@@ -226,6 +177,43 @@ export function useCommandRunner(): (raw: string) => void {
         return;
       }
 
+      if (PROJECTS_CMDS.has(cmd)) {
+        if (args[0] && !args[0].startsWith("--")) {
+          pushEntry({
+            kind: ETerminalEntryKind.PROJECT_DETAIL,
+            slug: normalizeSlug(args[0]),
+          });
+          return;
+        }
+        const tagFilter = parseTagFilter(args);
+        if (tagFilter) {
+          pushEntry({
+            kind: ETerminalEntryKind.PROJECTS_LIST,
+            tagFilter,
+          });
+          return;
+        }
+        openPicker("projects");
+        return;
+      }
+
+      if (POSTS_CMDS.has(cmd)) {
+        if (args[0] && !args[0].startsWith("--")) {
+          pushEntry({
+            kind: ETerminalEntryKind.POST_DETAIL,
+            slug: normalizeSlug(args[0]),
+          });
+          return;
+        }
+        const page = parsePage(args);
+        if (page !== null) {
+          pushEntry({ kind: ETerminalEntryKind.POSTS_LIST, page });
+          return;
+        }
+        openPicker("posts");
+        return;
+      }
+
       const handler = HANDLERS[cmd];
       if (!handler) {
         pushEntry({ kind: ETerminalEntryKind.ERROR, message: cmd });
@@ -238,6 +226,13 @@ export function useCommandRunner(): (raw: string) => void {
       }
       for (const e of result) pushEntry(e);
     },
-    [pushEntry, pushHistory, resetToBoot, cycleTheme, setThemeByName],
+    [
+      pushEntry,
+      pushHistory,
+      resetToBoot,
+      cycleTheme,
+      setThemeByName,
+      openPicker,
+    ],
   );
 }

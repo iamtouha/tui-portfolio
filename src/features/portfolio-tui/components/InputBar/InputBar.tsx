@@ -64,7 +64,12 @@ export const InputBar = forwardRef<IInputBarHandle, IInputBarProps>(
         if (isOpen && matches[activeIdx]) {
           setValue(matches[activeIdx].k + " ");
           setActiveIdx(0);
+          return;
         }
+        const firstCard = document.querySelector<HTMLElement>(
+          "[data-home-card]",
+        );
+        if (firstCard) firstCard.focus();
         return;
       }
       if (e.key === "ArrowUp") {
@@ -127,6 +132,7 @@ export const InputBar = forwardRef<IInputBarHandle, IInputBarProps>(
           </div>
           <input
             ref={inputRef}
+            data-terminal-input
             className="w-full border-0 bg-transparent p-0 font-[inherit] text-fg caret-accent outline-none"
             autoComplete="off"
             autoCorrect="off"

@@ -12,7 +12,9 @@ import {
   ExperienceDetail,
   ExperienceList,
   Help,
-  Posts,
+  Home,
+  PostDetail,
+  PostsList,
   ProjectDetail,
   ProjectsList,
   PromptEcho,
@@ -39,6 +41,8 @@ function renderEntry(
       return <PromptEcho time={entry.time} cmd={entry.cmd} />;
     case ETerminalEntryKind.BOOT:
       return <Banner />;
+    case ETerminalEntryKind.HOME:
+      return <Home onRunCommand={onRunCommand} />;
     case ETerminalEntryKind.HELP:
       return <Help />;
     case ETerminalEntryKind.ABOUT:
@@ -58,8 +62,10 @@ function renderEntry(
       return <ProjectDetail slug={entry.slug} />;
     case ETerminalEntryKind.SKILLS:
       return <Skills />;
-    case ETerminalEntryKind.POSTS:
-      return <Posts />;
+    case ETerminalEntryKind.POSTS_LIST:
+      return <PostsList page={entry.page} onRunCommand={onRunCommand} />;
+    case ETerminalEntryKind.POST_DETAIL:
+      return <PostDetail slug={entry.slug} />;
     case ETerminalEntryKind.CONTACT:
       return <Contact />;
     case ETerminalEntryKind.RESUME:
@@ -89,6 +95,16 @@ export function TerminalOutput({ entries, onRunCommand }: ITerminalOutputProps) 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const last = entries[entries.length - 1];
+    if (last?.kind === ETerminalEntryKind.POST_DETAIL) {
+      const lastChild = el.lastElementChild as HTMLElement | null;
+      if (lastChild) {
+        const containerTop = el.getBoundingClientRect().top;
+        const childTop = lastChild.getBoundingClientRect().top;
+        el.scrollTop += childTop - containerTop;
+        return;
+      }
+    }
     el.scrollTop = el.scrollHeight;
   }, [entries]);
 

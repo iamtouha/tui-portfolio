@@ -5,3 +5,5 @@ export { TerminalOutput } from "./TerminalOutput";
 export { InputBar, type IInputBarHandle } from "./InputBar";
 export { Autocomplete } from "./Autocomplete";
 export { HintBar } from "./HintBar";
+export { Picker } from "./Picker";
+export { MarkdownProse } from "./MarkdownProse";

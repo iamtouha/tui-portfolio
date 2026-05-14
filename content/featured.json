@@ -1,4 +1,4 @@
 {
-  "featuredPosts": [],
-  "featuredProjects": []
+  "featuredPosts": ["why-performance-profiling-matters"],
+  "featuredProjects": ["nextjs-starter-template", "innomarkt-chat"]
 }

@@ -32,7 +32,7 @@ export interface IProject {
   year: string;
   about: string;
   features: string[];
-  url: string;
+  url?: string;
   featured?: boolean;
 }
 
@@ -85,6 +85,7 @@ export type TSkills = Record<string, string[]>;
 export enum ETerminalEntryKind {
   PROMPT = "prompt",
   BOOT = "boot",
+  HOME = "home",
   HELP = "help",
   ABOUT = "about",
   EXPERIENCE_LIST = "experience-list",
@@ -92,7 +93,8 @@ export enum ETerminalEntryKind {
   PROJECTS_LIST = "projects-list",
   PROJECT_DETAIL = "project-detail",
   SKILLS = "skills",
-  POSTS = "posts",
+  POSTS_LIST = "posts-list",
+  POST_DETAIL = "post-detail",
   CONTACT = "contact",
   RESUME = "resume",
   THEME_SET = "theme-set",
@@ -112,6 +114,7 @@ export type TDistributiveOmit<T, K extends string> = T extends unknown
 export type TTerminalEntry =
   | { id: number; kind: ETerminalEntryKind.PROMPT; time: string; cmd: string }
   | { id: number; kind: ETerminalEntryKind.BOOT }
+  | { id: number; kind: ETerminalEntryKind.HOME }
   | { id: number; kind: ETerminalEntryKind.HELP }
   | { id: number; kind: ETerminalEntryKind.ABOUT }
   | { id: number; kind: ETerminalEntryKind.EXPERIENCE_LIST }
@@ -119,7 +122,8 @@ export type TTerminalEntry =
   | { id: number; kind: ETerminalEntryKind.PROJECTS_LIST; tagFilter: string }
   | { id: number; kind: ETerminalEntryKind.PROJECT_DETAIL; slug: string }
   | { id: number; kind: ETerminalEntryKind.SKILLS }
-  | { id: number; kind: ETerminalEntryKind.POSTS }
+  | { id: number; kind: ETerminalEntryKind.POSTS_LIST; page: number }
+  | { id: number; kind: ETerminalEntryKind.POST_DETAIL; slug: string }
   | { id: number; kind: ETerminalEntryKind.CONTACT }
   | { id: number; kind: ETerminalEntryKind.RESUME }
   | { id: number; kind: ETerminalEntryKind.THEME_SET; name: string }

@@ -1,0 +1,31 @@
+{
+  "name": "Nextjs Starter Template for Authentication & Stripe Integration",
+  "desc": "A Next.js starter template with Lucia authentication, Drizzle, tRPC, Stripe, shadcn-ui, and React Email.",
+  "tags": [
+    "typescript",
+    "nextjs",
+    "lucia",
+    "drizzle",
+    "trpc",
+    "stripe",
+    "tailwindcss",
+    "shadcn-ui",
+    "react-email",
+    "nodemailer"
+  ],
+  "role": "Full-stack Developer",
+  "year": "Jan 24, 2024",
+  "about": "Implementing authentication in Next.js, especially email and password authentication, can be challenging. NextAuth intentionally limits email password functionality to discourage password usage because of the security risks and added complexity. Some client projects still require user password authentication, and Lucia offers a flexible alternative with more control over the authentication flow.\n\nThis template provides a starting point for building a Next.js app with Lucia authentication, tRPC session access, Stripe subscriptions, Drizzle-backed MySQL persistence, and React Email templates. Lucia is less opinionated than NextAuth.js, which requires more setup but gives the project more room for custom authentication behavior without compromising on security.",
+  "features": [
+    "Credential and OAuth authentication powered by Lucia.",
+    "Public and protected route management inside the app directory.",
+    "Email verification flow for confirming user identities.",
+    "Password reset flow using emailed password reset links.",
+    "Lucia and tRPC integration for accessing sessions and user information through procedures.",
+    "Stripe subscription setup for user payments.",
+    "React Email templates for transactional email content.",
+    "MySQL database setup with Drizzle ORM and PlanetScale.",
+    "Database migration scripts for extending the schema as the project grows."
+  ],
+  "url": "https://github.com/iamtouha/next-lucia-auth"
+}

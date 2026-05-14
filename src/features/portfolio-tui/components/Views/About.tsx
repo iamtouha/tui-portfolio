@@ -21,27 +21,6 @@ export function About() {
           </tr>
           <tr>
             <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
-              email
-            </td>
-            <td>
-              <a
-                className="border-b border-dotted border-blue text-blue no-underline hover:border-accent hover:text-accent"
-                href={`mailto:${PROFILE.email}`}
-              >
-                {PROFILE.email}
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
-              status
-            </td>
-            <td>
-              <span className="text-green">● open to work</span>
-            </td>
-          </tr>
-          <tr>
-            <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
               timezone
             </td>
             <td>{PROFILE.timezone}</td>
@@ -56,11 +35,6 @@ export function About() {
           </tr>
         </tbody>
       </table>
-      <div className="mt-2 text-dim">
-        Run <span className="text-accent">/experience</span>,{" "}
-        <span className="text-accent">/projects</span>, or{" "}
-        <span className="text-accent">/contact</span> for more.
-      </div>
     </div>
   );
 }
