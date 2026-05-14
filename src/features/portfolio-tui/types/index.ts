@@ -37,12 +37,28 @@ export interface IProject {
 }
 
 export interface IPost {
+  slug: string;
   title: string;
   date: string;
   cover: string;
   summary: string;
   body: string;
   relatedPosts?: string[];
+}
+
+export interface IFeatured {
+  featuredPosts: string[];
+  featuredProjects: string[];
+}
+
+export interface IPortfolioContent {
+  profile: IProfile;
+  experience: IExperience[];
+  projects: IProject[];
+  posts: IPost[];
+  skills: TSkills;
+  socials: ISocial[];
+  featured: IFeatured;
 }
 
 export interface ISocial {

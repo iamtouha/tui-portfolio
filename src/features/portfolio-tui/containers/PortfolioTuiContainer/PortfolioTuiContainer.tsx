@@ -9,13 +9,20 @@ import {
   TerminalOutput,
   type IInputBarHandle,
 } from "../../components";
+import { ContentProvider } from "../../contexts";
 import { useCommandRunner } from "../../hooks";
 import { useTerminalStore } from "../../stores";
-import { ETerminalEntryKind } from "../../types";
+import { ETerminalEntryKind, type IPortfolioContent } from "../../types";
 
 const BOOT_AUTO_ABOUT_MS = 150;
 
-export function PortfolioTuiContainer() {
+interface IPortfolioTuiContainerProps {
+  initialContent: IPortfolioContent;
+}
+
+export function PortfolioTuiContainer({
+  initialContent,
+}: IPortfolioTuiContainerProps) {
   const entries = useTerminalStore((s) => s.entries);
   const pushEntry = useTerminalStore((s) => s.pushEntry);
   const resetToBoot = useTerminalStore((s) => s.resetToBoot);
@@ -55,20 +62,22 @@ export function PortfolioTuiContainer() {
   }
 
   return (
-    <div className="h-full flex flex-col" onClick={handleBodyClick}>
-      <Chrome />
-      <div className="flex min-h-0 flex-1">
-        <TerminalOutput entries={entries} onRunCommand={runCommand} />
-        <Sidebar onRunCommand={runCommand} />
+    <ContentProvider value={initialContent}>
+      <div className="h-full flex flex-col" onClick={handleBodyClick}>
+        <Chrome />
+        <div className="flex min-h-0 flex-1">
+          <TerminalOutput entries={entries} onRunCommand={runCommand} />
+          <Sidebar onRunCommand={runCommand} />
+        </div>
+        <div className="shrink-0 border-t border-border-token bg-bg">
+          <InputBar
+            ref={inputRef}
+            onSubmit={runCommand}
+            onClearShortcut={resetToBoot}
+          />
+          <HintBar />
+        </div>
       </div>
-      <div className="shrink-0 border-t border-border-token bg-bg">
-        <InputBar
-          ref={inputRef}
-          onSubmit={runCommand}
-          onClearShortcut={resetToBoot}
-        />
-        <HintBar />
-      </div>
-    </div>
+    </ContentProvider>
   );
 }

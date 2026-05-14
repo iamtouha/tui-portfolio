@@ -1,6 +1,7 @@
-import { SKILLS } from "../../data";
+import { useContent } from "../../contexts";
 
 export function Skills() {
+  const { skills: SKILLS } = useContent();
   return (
     <div className="mb-1 mt-2">
       <div className="text-muted">stack I reach for most</div>

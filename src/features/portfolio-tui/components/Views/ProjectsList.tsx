@@ -1,6 +1,6 @@
 "use client";
 
-import { PROJECTS } from "../../data";
+import { useContent } from "../../contexts";
 
 interface IProjectsListProps {
   tagFilter: string;
@@ -8,6 +8,7 @@ interface IProjectsListProps {
 }
 
 export function ProjectsList({ tagFilter, onRunCommand }: IProjectsListProps) {
+  const { projects: PROJECTS } = useContent();
   const list = tagFilter
     ? PROJECTS.filter((p) =>
         p.tags.some((t) => t.toLowerCase().includes(tagFilter.toLowerCase())),

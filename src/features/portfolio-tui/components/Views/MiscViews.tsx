@@ -1,6 +1,7 @@
-import { PROFILE } from "../../data";
+import { useContent } from "../../contexts";
 
 export function Whoami() {
+  const { profile: PROFILE } = useContent();
   return <div className="mb-1 mt-2">{PROFILE.handle}</div>;
 }
 

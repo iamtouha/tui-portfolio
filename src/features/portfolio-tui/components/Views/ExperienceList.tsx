@@ -1,12 +1,13 @@
 "use client";
 
-import { EXPERIENCE } from "../../data";
+import { useContent } from "../../contexts";
 
 interface IExperienceListProps {
   onRunCommand: (raw: string) => void;
 }
 
 export function ExperienceList({ onRunCommand }: IExperienceListProps) {
+  const { experience: EXPERIENCE } = useContent();
   return (
     <div className="mb-1 mt-2">
       <div className="text-muted">

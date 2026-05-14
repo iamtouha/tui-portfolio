@@ -1,8 +1,9 @@
-import { PROFILE } from "../../data";
+import { useContent } from "../../contexts";
 
 const RESUME_PDF = "/FSD_5_Touha_Zohair.pdf";
 
 export function Resume() {
+  const { profile: PROFILE } = useContent();
   return (
     <div className="mb-1 mt-2">
       <div>

@@ -1,11 +1,12 @@
-import { EXPERIENCE } from "../../data";
+import { useContent } from "../../contexts";
 
 interface IExperienceDetailProps {
   slug: string;
 }
 
 export function ExperienceDetail({ slug }: IExperienceDetailProps) {
-  const e = EXPERIENCE.find((x) => x.slug === slug);
+  const { experience } = useContent();
+  const e = experience.find((x) => x.slug === slug);
   if (!e) {
     return (
       <>

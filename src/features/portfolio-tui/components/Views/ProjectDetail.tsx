@@ -1,11 +1,12 @@
-import { PROJECTS } from "../../data";
+import { useContent } from "../../contexts";
 
 interface IProjectDetailProps {
   slug: string;
 }
 
 export function ProjectDetail({ slug }: IProjectDetailProps) {
-  const p = PROJECTS.find((x) => x.slug === slug);
+  const { projects } = useContent();
+  const p = projects.find((x) => x.slug === slug);
   if (!p) {
     return (
       <>

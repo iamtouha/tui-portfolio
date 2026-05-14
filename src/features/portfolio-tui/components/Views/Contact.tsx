@@ -1,8 +1,9 @@
-import { SOCIAL } from "../../data";
+import { useContent } from "../../contexts";
 
 const KEY_PAD = 9;
 
 export function Contact() {
+  const { socials: SOCIAL } = useContent();
   return (
     <div className="mb-1 mt-2">
       <div className="text-muted">Easiest: just email me. I reply within a day.</div>
