@@ -28,6 +28,12 @@ collections:
           - { label: Email, name: email, widget: string }
           - { label: Timezone, name: timezone, widget: string }
           - { label: Tagline, name: tagline, widget: text }
+          - {
+              label: Stacks,
+              name: stacks,
+              widget: list,
+              field: { label: Stack, name: stack, widget: string },
+            }
       - name: featured
         label: Featured Posts/Projects
         file: content/featured.json

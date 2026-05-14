@@ -6,6 +6,7 @@ export interface IProfile {
   email: string;
   tagline: string;
   timezone: string;
+  stacks: string[];
 }
 
 export interface ICommandSpec {

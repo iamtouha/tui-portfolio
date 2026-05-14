@@ -29,9 +29,7 @@ export function About() {
             <td className="w-[1%] whitespace-nowrap py-1 pr-3 align-top text-muted">
               stack
             </td>
-            <td className="text-muted">
-              TypeScript · Next.js · Node.js · Postgres · Tailwind
-            </td>
+            <td className="text-muted">{PROFILE.stacks.join(" · ")}</td>
           </tr>
         </tbody>
       </table>
