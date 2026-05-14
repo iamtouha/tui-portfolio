@@ -1,5 +1,5 @@
 {
-  "title": "The Fundamentals: Time, CPU, Memory, and Network",
+  "title": "Performance Profiling Part 2: The Fundamentals - Time, CPU, Memory, and Network",
   "date": "2025-11-02",
   "cover": "/uploads/performance_profiling_in_be_fe.jpg",
   "summary": "A mental model for profiling applications through time, CPU, memory, and network or IO, plus the optimization cycle that keeps performance work grounded.",
