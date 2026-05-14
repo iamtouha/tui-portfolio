@@ -20,14 +20,17 @@ const THEME_VAR_KEYS = [
   ["--dim", "dim"],
   ["--accent", "accent"],
   ["--accent-2", "accent2"],
+  ["--shell-accent-glow", "accentGlow"],
+  ["--shell-blue-glow", "blueGlow"],
 ] as const;
 
 function applyThemeToDom(theme: ITheme): void {
   if (typeof document === "undefined") return;
-  const root = document.documentElement.style;
+  const root = document.documentElement;
   for (const [cssVar, key] of THEME_VAR_KEYS) {
-    root.setProperty(cssVar, theme[key]);
+    root.style.setProperty(cssVar, theme[key]);
   }
+  root.style.colorScheme = theme.scheme;
 }
 
 export type TPickerType = "posts" | "projects";

@@ -68,6 +68,11 @@ export interface ISocial {
   href: string;
 }
 
+export enum EColorScheme {
+  LIGHT = "light",
+  DARK = "dark",
+}
+
 export interface ITheme {
   name: string;
   accent: string;
@@ -79,6 +84,9 @@ export interface ITheme {
   fg: string;
   muted: string;
   dim: string;
+  accentGlow: string;
+  blueGlow: string;
+  scheme: EColorScheme;
 }
 
 export type TSkills = Record<string, string[]>;

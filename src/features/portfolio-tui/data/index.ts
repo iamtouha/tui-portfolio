@@ -1,4 +1,4 @@
-import type { ICommandSpec, ISocial, ITheme } from "@features/portfolio-tui/types";
+import { EColorScheme, type ICommandSpec, type ISocial, type ITheme } from "@features/portfolio-tui/types";
 
 export const COMMANDS: ICommandSpec[] = [
   { k: "/help", d: "list all commands" },
@@ -31,6 +31,9 @@ export const THEMES: ITheme[] = [
     fg: "#e8e2d8",
     muted: "#8a8278",
     dim: "#5d574f",
+    accentGlow: "rgba(217, 119, 87, 0.06)",
+    blueGlow: "rgba(106, 169, 201, 0.04)",
+    scheme: EColorScheme.DARK,
   },
   {
     name: "matrix",
@@ -43,6 +46,9 @@ export const THEMES: ITheme[] = [
     fg: "#dbe6dd",
     muted: "#7a8a7d",
     dim: "#4d5a51",
+    accentGlow: "rgba(127, 174, 111, 0.06)",
+    blueGlow: "rgba(158, 196, 143, 0.04)",
+    scheme: EColorScheme.DARK,
   },
   {
     name: "azure",
@@ -55,6 +61,9 @@ export const THEMES: ITheme[] = [
     fg: "#dee5ee",
     muted: "#7e8a98",
     dim: "#4f5868",
+    accentGlow: "rgba(106, 169, 201, 0.06)",
+    blueGlow: "rgba(155, 196, 216, 0.04)",
+    scheme: EColorScheme.DARK,
   },
   {
     name: "magenta",
@@ -67,6 +76,9 @@ export const THEMES: ITheme[] = [
     fg: "#ece0e8",
     muted: "#8c7e87",
     dim: "#5e525a",
+    accentGlow: "rgba(201, 122, 168, 0.06)",
+    blueGlow: "rgba(212, 163, 194, 0.04)",
+    scheme: EColorScheme.DARK,
   },
   {
     name: "paper",
@@ -79,6 +91,9 @@ export const THEMES: ITheme[] = [
     fg: "#2a2520",
     muted: "#6a6358",
     dim: "#9a9388",
+    accentGlow: "rgba(168, 90, 58, 0.05)",
+    blueGlow: "rgba(106, 169, 201, 0.06)",
+    scheme: EColorScheme.LIGHT,
   },
 ];
 
