@@ -30,12 +30,18 @@ function applyThemeToDom(theme: ITheme): void {
   }
 }
 
+export type TPickerType = "posts" | "projects";
+
 interface ITerminalState {
   entries: TTerminalEntry[];
   history: string[];
   histIdx: number;
   themeIdx: number;
   _entryId: number;
+  pickerOpen: boolean;
+  pickerType: TPickerType | null;
+  pickerQuery: string;
+  pickerIdx: number;
   pushEntry: (e: TTerminalEntryInput) => void;
   resetToBoot: () => void;
   pushHistory: (cmd: string) => void;
@@ -43,6 +49,10 @@ interface ITerminalState {
   cycleTheme: () => void;
   setThemeByName: (name: string) => boolean;
   applyCurrentTheme: () => void;
+  openPicker: (type: TPickerType) => void;
+  closePicker: () => void;
+  setPickerQuery: (q: string) => void;
+  setPickerIdx: (i: number) => void;
 }
 
 export const useTerminalStore = create<ITerminalState>()(
@@ -53,6 +63,10 @@ export const useTerminalStore = create<ITerminalState>()(
       histIdx: -1,
       themeIdx: 0,
       _entryId: 0,
+      pickerOpen: false,
+      pickerType: null,
+      pickerQuery: "",
+      pickerIdx: 0,
       pushEntry: (e) =>
         set((s) => {
           const id = s._entryId + 1;
@@ -63,10 +77,14 @@ export const useTerminalStore = create<ITerminalState>()(
         }),
       resetToBoot: () =>
         set((s) => {
-          const id = s._entryId + 1;
+          const bootId = s._entryId + 1;
+          const homeId = bootId + 1;
           return {
-            _entryId: id,
-            entries: [{ id, kind: ETerminalEntryKind.BOOT }],
+            _entryId: homeId,
+            entries: [
+              { id: bootId, kind: ETerminalEntryKind.BOOT },
+              { id: homeId, kind: ETerminalEntryKind.HOME },
+            ],
           };
         }),
       pushHistory: (cmd) =>
@@ -90,6 +108,22 @@ export const useTerminalStore = create<ITerminalState>()(
       applyCurrentTheme: () => {
         applyThemeToDom(THEMES[get().themeIdx]);
       },
+      openPicker: (type) =>
+        set({
+          pickerOpen: true,
+          pickerType: type,
+          pickerQuery: "",
+          pickerIdx: 0,
+        }),
+      closePicker: () =>
+        set({
+          pickerOpen: false,
+          pickerType: null,
+          pickerQuery: "",
+          pickerIdx: 0,
+        }),
+      setPickerQuery: (q) => set({ pickerQuery: q, pickerIdx: 0 }),
+      setPickerIdx: (i) => set({ pickerIdx: i }),
     }),
     {
       name: "portfolio-tui-store",

@@ -2,6 +2,7 @@ import type { ICommandSpec, ISocial, ITheme } from "@features/portfolio-tui/type
 
 export const COMMANDS: ICommandSpec[] = [
   { k: "/help", d: "list all commands" },
+  { k: "/home", d: "back to landing" },
   { k: "/about", d: "who I am, in 60 seconds" },
   { k: "/experience", d: "where I've worked" },
   { k: "/projects", d: "selected work" },
@@ -89,6 +90,7 @@ export const ASCII_BANNER = `   __                  __                __
 
 export const SIDEBAR_COMMANDS: ICommandSpec[] = [
   { k: "/help", d: "list all" },
+  { k: "/home", d: "landing" },
   { k: "/about", d: "who am i" },
   { k: "/experience", d: "work history" },
   { k: "/projects", d: "portfolio" },

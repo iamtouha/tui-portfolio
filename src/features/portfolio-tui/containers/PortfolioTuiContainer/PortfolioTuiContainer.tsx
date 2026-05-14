@@ -5,6 +5,7 @@ import {
   Chrome,
   HintBar,
   InputBar,
+  Picker,
   Sidebar,
   TerminalOutput,
   type IInputBarHandle,
@@ -13,8 +14,6 @@ import { ContentProvider } from "../../contexts";
 import { useCommandRunner } from "../../hooks";
 import { useTerminalStore } from "../../stores";
 import { ETerminalEntryKind, type IPortfolioContent } from "../../types";
-
-const BOOT_AUTO_ABOUT_MS = 150;
 
 interface IPortfolioTuiContainerProps {
   initialContent: IPortfolioContent;
@@ -40,16 +39,18 @@ export function PortfolioTuiContainer({
     bootedRef.current = true;
     if (useTerminalStore.getState().entries.length === 0) {
       pushEntry({ kind: ETerminalEntryKind.BOOT });
+      pushEntry({ kind: ETerminalEntryKind.HOME });
     }
-    const id = window.setTimeout(() => {
-      runCommand("/about");
-    }, BOOT_AUTO_ABOUT_MS);
     inputRef.current?.focus();
-    return () => window.clearTimeout(id);
-  }, [pushEntry, runCommand]);
+  }, [pushEntry]);
+
+  function focusInput() {
+    inputRef.current?.focus();
+  }
 
   function handleBodyClick(e: React.MouseEvent<HTMLDivElement>) {
     const target = e.target as HTMLElement;
+    if (useTerminalStore.getState().pickerOpen) return;
     if (
       target.closest("a") ||
       target.closest("[data-terminal-clickable]") ||
@@ -78,6 +79,7 @@ export function PortfolioTuiContainer({
           <HintBar />
         </div>
       </div>
+      <Picker onRunCommand={runCommand} onClose={focusInput} />
     </ContentProvider>
   );
 }
