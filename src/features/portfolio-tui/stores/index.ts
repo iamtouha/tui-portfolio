@@ -33,7 +33,7 @@ function applyThemeToDom(theme: ITheme): void {
   root.style.colorScheme = theme.scheme;
 }
 
-export type TPickerType = "posts" | "projects";
+export type TPickerType = "posts" | "projects" | "commands";
 
 const STREAM_ABORTERS = new Map<number, AbortController>();
 

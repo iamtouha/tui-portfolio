@@ -5,13 +5,14 @@ import {
   Chrome,
   HintBar,
   InputBar,
+  MobileCmdBar,
   Picker,
   Sidebar,
   TerminalOutput,
   type IInputBarHandle,
 } from "../../components";
 import { ContentProvider } from "../../contexts";
-import { useCommandRunner } from "../../hooks";
+import { useCommandRunner, useIsMobile } from "../../hooks";
 import { useTerminalStore } from "../../stores";
 import { ETerminalEntryKind, type IPortfolioContent } from "../../types";
 
@@ -26,7 +27,9 @@ export function PortfolioTuiContainer({
   const pushEntry = useTerminalStore((s) => s.pushEntry);
   const resetToBoot = useTerminalStore((s) => s.resetToBoot);
   const applyCurrentTheme = useTerminalStore((s) => s.applyCurrentTheme);
+  const openPicker = useTerminalStore((s) => s.openPicker);
   const runCommand = useCommandRunner();
+  const isMobile = useIsMobile();
   const inputRef = useRef<IInputBarHandle | null>(null);
   const bootedRef = useRef<boolean>(false);
 
@@ -41,16 +44,18 @@ export function PortfolioTuiContainer({
       pushEntry({ kind: ETerminalEntryKind.BOOT });
       pushEntry({ kind: ETerminalEntryKind.HOME });
     }
-    inputRef.current?.focus();
-  }, [pushEntry]);
+    if (!isMobile) inputRef.current?.focus();
+  }, [pushEntry, isMobile]);
 
   function focusInput() {
+    if (isMobile) return;
     inputRef.current?.focus();
   }
 
   function handleBodyClick(e: React.MouseEvent<HTMLDivElement>) {
     const target = e.target as HTMLElement;
     if (useTerminalStore.getState().pickerOpen) return;
+    if (isMobile) return;
     if (
       target.closest("a") ||
       target.closest("[data-terminal-clickable]") ||
@@ -66,6 +71,10 @@ export function PortfolioTuiContainer({
     <ContentProvider value={initialContent}>
       <div className="h-full flex flex-col" onClick={handleBodyClick}>
         <Chrome />
+        <MobileCmdBar
+          onRunCommand={runCommand}
+          onOpenPicker={() => openPicker("commands")}
+        />
         <div className="flex min-h-0 flex-1">
           <TerminalOutput entries={entries} onRunCommand={runCommand} />
           <Sidebar onRunCommand={runCommand} />

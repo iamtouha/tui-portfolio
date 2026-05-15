@@ -115,11 +115,13 @@ export const InputBar = forwardRef<IInputBarHandle, IInputBarProps>(
     return (
       <div className="flex items-center gap-2.5 px-[1.375rem] py-2.5 max-[32.5rem]:px-3.5">
         <span className="select-none font-medium text-accent">
-          <span>touha</span>
-          <span className="text-muted">@</span>
-          <span className="text-accent-2">portfolio</span>
-          <span className="text-muted">:~$</span>
-          <span className="ml-1 text-accent">❯</span>
+          <span className="max-md:hidden">
+            <span>touha</span>
+            <span className="text-muted">@</span>
+            <span className="text-accent-2">portfolio</span>
+            <span className="text-muted">:~$</span>
+          </span>
+          <span className="ml-1 text-accent max-md:ml-0">❯</span>
         </span>
         <div className="relative flex flex-1 items-center">
           <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 whitespace-pre text-dim">

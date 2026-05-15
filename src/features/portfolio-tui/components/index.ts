@@ -7,3 +7,4 @@ export { Autocomplete } from "./Autocomplete";
 export { HintBar } from "./HintBar";
 export { Picker } from "./Picker";
 export { MarkdownProse } from "./MarkdownProse";
+export { MobileCmdBar } from "./MobileCmdBar";

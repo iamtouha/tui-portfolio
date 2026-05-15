@@ -8,6 +8,8 @@ import {
   type KeyboardEvent,
 } from "react";
 import { useContent } from "../../contexts";
+import { COMMANDS } from "../../data";
+import { useIsMobile } from "../../hooks";
 import { useTerminalStore } from "../../stores";
 import {
   filterItems,
@@ -54,6 +56,17 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
         featured: Boolean(p.featured),
       }));
     }
+    if (type === "commands") {
+      return COMMANDS.map<IPickerItem>((c) => ({
+        slug: c.k,
+        title: c.k,
+        sub: c.d,
+        meta: "",
+        haystack: `${c.k} ${c.d}`.toLowerCase(),
+        tags: [],
+        featured: false,
+      }));
+    }
     return [];
   }, [type, posts, projects]);
 
@@ -63,12 +76,14 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
 
   const searchRef = useRef<HTMLInputElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!open) return;
+    if (isMobile) return;
     const id = requestAnimationFrame(() => searchRef.current?.focus());
     return () => cancelAnimationFrame(id);
-  }, [open]);
+  }, [open, isMobile]);
 
   useLayoutEffect(() => {
     if (!open) return;
@@ -91,7 +106,9 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
     if (!item || !type) return;
     closePicker();
     onClose();
-    onRunCommand(type === "posts" ? `/posts ${item.slug}` : `/projects ${item.slug}`);
+    if (type === "posts") onRunCommand(`/posts ${item.slug}`);
+    else if (type === "projects") onRunCommand(`/projects ${item.slug}`);
+    else onRunCommand(item.slug);
   }
 
   function handleSearchKey(e: KeyboardEvent<HTMLInputElement>) {
@@ -152,20 +169,24 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
   const hint = filtered.length
     ? type === "posts"
       ? "↵ to read this post"
-      : "↵ to view this project"
+      : type === "projects"
+        ? "↵ to view this project"
+        : "↵ to run"
     : "press esc to close";
 
   const placeholder =
     type === "posts"
       ? "filter posts by title, tag, date…"
-      : "filter projects by name, stack, role…";
+      : type === "projects"
+        ? "filter projects by name, stack, role…"
+        : "filter commands…";
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label="picker"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-[9vh] backdrop-blur-[3px]"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-[9vh] backdrop-blur-[3px] max-md:items-stretch max-md:pt-0"
       style={{ background: "rgba(10, 8, 7, 0.55)" }}
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) {
@@ -175,7 +196,7 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
       }}
     >
       <div
-        className="flex max-h-[72vh] w-[min(45rem,92vw)] flex-col overflow-hidden rounded-md border border-border-token bg-bg-soft"
+        className="flex max-h-[72vh] w-[min(45rem,92vw)] flex-col overflow-hidden rounded-md border border-border-token bg-bg-soft max-md:h-screen max-md:max-h-screen max-md:w-screen max-md:rounded-none max-md:border-x-0"
         style={{ boxShadow: "0 1.5rem 5rem rgba(0,0,0,0.55)" }}
       >
         <div className="flex items-center gap-2.5 border-b border-border-token bg-panel px-3.5 py-2">
@@ -185,6 +206,18 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
           <span className="ml-auto text-[0.71875rem] text-dim">
             {countText}
           </span>
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => {
+              closePicker();
+              onClose();
+            }}
+            className="hidden h-6 w-6 items-center justify-center rounded-[0.25rem] border border-border-token text-[0.75rem] leading-none text-muted hover:border-accent hover:text-accent max-md:inline-flex"
+            style={{ WebkitTapHighlightColor: "transparent" }}
+          >
+            ✕
+          </button>
         </div>
         <div className="flex items-center gap-2 border-b border-border-token px-3.5 py-2">
           <span className="text-accent select-none">/</span>
@@ -198,7 +231,7 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
             spellCheck={false}
             onChange={(e) => setPickerQuery(e.target.value)}
             onKeyDown={handleSearchKey}
-            className="flex-1 border-0 bg-transparent font-mono text-fg outline-none placeholder:text-dim"
+            className="flex-1 border-0 bg-transparent font-mono text-fg outline-none placeholder:text-dim max-md:text-base"
             style={{ caretColor: "var(--accent)" }}
           />
         </div>
@@ -296,7 +329,7 @@ export function Picker({ onRunCommand, onClose }: IPickerProps) {
           )}
         </div>
         <div className="flex justify-between gap-2.5 border-t border-border-token bg-panel px-3.5 py-1.5 text-[0.6875rem] text-dim">
-          <div className="space-x-3">
+          <div className="space-x-3 [&>span:nth-child(n+2)]:max-md:hidden">
             <span>
               <Kbd>↑</Kbd>
               <Kbd>↓</Kbd> navigate

@@ -98,6 +98,14 @@ export function TerminalOutput({ entries, onRunCommand }: ITerminalOutputProps) 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const isBootHome =
+      entries.length === 2 &&
+      entries[0].kind === ETerminalEntryKind.BOOT &&
+      entries[1].kind === ETerminalEntryKind.HOME;
+    if (isBootHome) {
+      el.scrollTop = 0;
+      return;
+    }
     const last = entries[entries.length - 1];
     if (last?.kind === ETerminalEntryKind.POST_DETAIL) {
       const lastChild = el.lastElementChild as HTMLElement | null;
